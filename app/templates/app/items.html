@@ -1,0 +1,100 @@
+{% extends "app/layout.html" %}
+
+{% block title %}
+    Items
+{% endblock %}
+
+{% block main %}
+    <!-- Load jQuery -->
+    <script type="text/javascript" language="javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+	<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+
+    <script>
+        function showModal(pk, item) {
+            jQuery.noConflict();
+            $(".modal-body").html("Are you sure you would like to remove '" + item + "'?");
+            $(".btn-primary").val(pk);
+            $("#exampleModalCenter").modal('show');
+        };
+    </script>
+
+    <script>
+        function confirmRemove() {
+            // TODO - Finish remove confirmation
+        }
+    </script>
+
+    <!-- Initialise DataTables -->
+    <script>
+        $(document).ready(function() {
+            jQuery.noConflict();
+            $('#data-table').DataTable();
+        });
+    </script>
+
+    <br>
+
+    <nav class="breadcrumb" aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Items</li>
+        </ol>
+    </nav>
+
+    <div class="heading-inline-title">
+        <h4><i class="fas fa-layer-group"></i> ITEMS</h4>
+        <a href="/item/create" class="btn btn-primary float-right">Add New Item</a>
+    </div>
+
+    <br>
+
+    <div class="container-flex white">
+        <table class="table table-striped table-borderless shadow" id="data-table">
+            <thead>
+                <tr>
+                    <th scope="col" class="p-4">NAME</th>
+                    <th scope="col" class="p-4">LIST</th>
+                    <th scope="col" class="p-4">STATUS</th>
+                    <th scope="col" class="item-actions p-4"></th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for item in query %}
+                <tr>
+                    <td class="px-4"><a href="{% url 'item_view' pk=item.pk %}">{{ item }}</a></td>
+                    <td class="px-4"><a href="#">{{ item.list }}</a></td>
+                    <td class="px-4">{{ item.marks_percent }}</td>
+                    <td class="item-actions px-4">
+                        <a href="javascript:void(0)" onclick="showModal({{ item.pk }}, '{{ item }}');"><i class="far fa-trash-alt"></i></a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <br>
+    <br>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle">Are you sure?</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            Please confirm that you would like to delete [].
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" onclick="confirmRemove();">Confirm</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,52 @@
+{% load static %}
+
+<footer>
+    <div class="container">
+        <br>
+        <img src="{% static 'img/logo-dark.png' %}" width="84" height="27">
+        <br>
+        <br>
+
+        <div class="row">
+            <div class="col-sm">
+                {% if user.is_authenticated %}
+                <ul class="navbar-nav mr-auto">
+                    <li class="footer-item">
+                        <a class="footer-link" href="/home">Home</a>
+                    </li>
+                    <li class="footer-item">
+                        <a class="footer-link" href="/lists">Lists</a>
+                    </li>
+                    <li class="footer-item">
+                        <a class="footer-link" href="/items">Items</a>
+                    </li>
+                </ul>
+                {% else %}
+                <ul class="navbar-nav mr-auto">
+                    <li class="footer-item">
+                        <a class="footer-link" href="/accounts/login">Sign In</a>
+                    </li>
+                    <li class="footer-item">
+                        <a class="footer-link" href="/register">Register</a>
+                    </li>
+                </ul>
+                {% endif %}
+                <br>
+                <small>© Copyright 2018 - A CS50 Project</small>
+            </div>
+            <div class="col-sm">
+                {% if user.is_authenticated %}
+                <ul class="navbar-nav mr-auto">
+                    <li class="footer-item">
+                        <a class="footer-link" href="/account">Account</a>
+                    </li>
+                    <li class="footer-item">
+                        <a class="footer-link" href="/accounts/logout">Sign Out</a>
+                    </li>
+                </ul>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    <br>
+</footer>

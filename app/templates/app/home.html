@@ -1,0 +1,223 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <!-- Meta -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <title>LearnIt | Home</title>
+
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+        <!-- Font Awesome Icons -->
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+
+        <!-- Google Fonts -->
+        <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Merriweather" rel="stylesheet">
+
+        <!-- Override CSS -->
+        <link rel="stylesheet" href="{% static 'css/override.css' %}">
+
+        <!-- Load jQuery -->
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+
+        <!-- Handle Select All and Select None buttons -->
+        <script>
+            function selectAll() {
+                $("input:checkbox").prop('checked', true);
+            }
+            function selectNone() {
+                $("input:checkbox").prop('checked', false);
+            }
+        </script>
+
+        <!-- Handle Reveal / Next Item event -->
+        <script>
+            function revealNext() {
+                if (document.getElementById("comments-text").style.opacity == 1.0) {
+                    document.getElementById("reveal-next").innerHTML = "Reveal";
+                    getItem();
+                }
+                else {
+                    document.getElementById("reveal-next").innerHTML = "Next";
+                    document.getElementById("secondary-text").style.opacity = "1.0";
+                    document.getElementById("comments-text").style.opacity = "1.0";
+                }
+            }
+        </script>
+
+        <!-- Handle AJAX update -->
+        <script type="text/javascript">
+            function getItem() {
+
+                var lists = [];
+                $('.form-check input[type="checkbox"]:checked').each(function() {
+                    lists.push($(this).attr("value"));
+                });
+
+                $.ajax({
+                    type: "POST",
+                    url: "http://127.0.0.1:8000/ajax/get_item/",
+                    data: JSON.stringify({lists: lists}),
+                    beforeSend: function(xhr){ xhr.setRequestHeader('X-CSRFToken', '{{ csrf_token }}');},
+                    contentType: "application/json; charset=utf-8",
+                    success: function(data){
+                        document.getElementById("secondary-text").style.opacity = "0";
+                        document.getElementById("comments-text").style.opacity = "0";
+
+                        document.getElementsByClassName("home-display shadow p-5")[0].setAttribute("id", data["item"]["pk"]);
+
+                        document.getElementById("primary-text").innerHTML = data["item"]["primary"];
+                        document.getElementById("secondary-text").innerHTML = data["item"]["secondary"];
+                        document.getElementById("comments-text").innerHTML = data["item"]["comments"];
+                    }
+                });
+            };
+
+            $(document).ready(function() {
+                getItem();
+            });
+        </script>
+
+        <!-- Handle Mark Correct event -->
+        <script>
+            function markCorrect() {
+                var pk = document.getElementsByClassName("home-display shadow p-5")[0].getAttribute("id");
+
+                $.ajax({
+                    type: "POST",
+                    url: "http://127.0.0.1:8000/ajax/mark_correct/",
+                    data: JSON.stringify({item: pk}),
+                    beforeSend: function(xhr){ xhr.setRequestHeader('X-CSRFToken', '{{ csrf_token }}');},
+                    contentType: "application/json; charset=utf-8"
+                });
+
+            }
+        </script>
+
+        <!-- Handle Mark Incorrect event -->
+        <script>
+            function markIncorrect() {
+                var pk = document.getElementsByClassName("home-display shadow p-5")[0].getAttribute("id");
+
+                $.ajax({
+                    type: "POST",
+                    url: "http://127.0.0.1:8000/ajax/mark_incorrect/",
+                    data: JSON.stringify({item: pk}),
+                    beforeSend: function(xhr){ xhr.setRequestHeader('X-CSRFToken', '{{ csrf_token }}');},
+                    contentType: "application/json; charset=utf-8"
+                });
+
+            }
+        </script>
+    </head>
+
+    <body>
+        <!-- Navbar -->
+        <nav class="navbar navbar-expand-lg navbar-dark" id="navbar-master">
+            <a class="navbar-brand" href="/home">
+                <img src="{% static 'img/logo.png' %}" width="84" height="27" class="d-inline-block align-top logo-navbar" alt="">
+            </a>
+
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="/lists"><i class="fas fa-list"></i> Lists</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/items"><i class="fas fa-layer-group"></i> Items</a>
+                    </li>
+                    {% endif %}
+                </ul>
+                <form class="form-inline my-2 my-lg-0">
+                    <ul class="navbar-nav mr-auto">
+                        {% if user.is_authenticated %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="/account"><i class="fas fa-user"></i> {{ user }}</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/accounts/logout"><i class="fas fa-sign-out-alt"></i></a>
+                            </li>
+                        {% else %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="/accounts/login"><i class="fas fa-sign-in-alt"></i> Log In</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/register"><i class="fas fa-user-plus"></i> Register</a>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </form>
+            </div>
+        </nav>
+
+        <div class="extend-height">
+            <div class="row extend-height">
+                <div class="col-2">
+                    <div class="container" id="lists-container">
+                        <br>
+                        <h5>Lists</h5>
+                        <a href="javascript:void(0)" onclick="selectAll();"><small>Select All</small></a> |
+                        <a href="javascript:void(0)" onclick="selectNone();"><small>Select None</small></a><br>
+                        <hr>
+
+                        <div id="lists">
+                            <form>
+                                <div class="form-check">
+                                    <input type="checkbox" class="form-check-input" id="least-frequent" value="998">
+                                    <label class="form-check-label" for="least-frequent">Least Frequent</label>
+                                </div>
+                                <div class="form-check">
+                                    <input type="checkbox" class="form-check-input" id="most-difficult" value="999">
+                                    <label class="form-check-label" for="most-difficult">Most Difficult</label>
+                                </div>
+                                {% for item in lists %}
+                                    <div class="form-check">
+                                        <input type="checkbox" class="form-check-input" id="{{ item.name }}" value="{{ item.id }}" checked>
+                                        <label class="form-check-label" for="{{ item.name }}">{{ item.name }}</label>
+                                    </div>
+                                {% endfor %}
+                            </form>
+                            <br>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-8">
+                    <br>
+                    <div class="home-display shadow p-5">
+                        <h1><span id="primary-text"></span></h1>
+                        <hr>
+                        <br>
+                        <h2><span id="secondary-text"></span></h2>
+                        <br>
+                        <h5><span id="comments-text"></span></h5>
+                        <br>
+                        <a href="javascript:void(0)" class="btn btn-primary control-btn" onclick="revealNext();" id="reveal-next"><i class="fas fa-angle-double-right"></i> Reveal</a>
+                        <a href="javascript:void(0)" class="btn btn-primary control-btn" id="mark-correct" onclick="markCorrect();"><i class="fas fa-check"></i> Mark Correct</a>
+                        <a href="javascript:void(0)" class="btn btn-primary control-btn" id="mark-incorrect" onclick="markIncorrect();"><i class="fas fa-times"></i> Mark Incorrect</a>
+                    </div>
+
+                </div>
+
+                <div class="col-2">
+                </div>
+            </div>
+        </div>
+    </body>
+
+    <!-- Footer -->
+    {% include 'app/footer.html' %}
+
+</html>

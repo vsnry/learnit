@@ -1,0 +1,168 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <!-- Meta -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <title>LearnIt | Welcome!</title>
+
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+        <!-- Google Fonts -->
+        <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Merriweather" rel="stylesheet">
+
+        <!-- Override CSS -->
+        <link rel="stylesheet" href="{% static 'css/override.css' %}">
+
+        <!-- Font Awesome Icons -->
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+
+    </head>
+
+    <body>
+        <!-- Navigation -->
+        <nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top navbar-transparency" id="navbar">
+            <div class="container">
+                <a class="navbar-brand" href="/"><img src="{% static 'img/logo-dark.png' %}" width="84" height="27"></a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    {% if user.is_authenticated %}
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/home">Get Learning!</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/accounts/logout"><i class="fas fa-sign-out-alt"></i></a>
+                        </li>
+                    </ul>
+                    {% else %}
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/register">Register</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/accounts/login">Sign In</a>
+                        </li>
+                    </ul>
+                    {% endif %}
+                </div>
+            </div>
+        </nav>
+
+        <header class="masthead text-center text-white">
+            <div class="masthead-content">
+                <div class="container">
+                    <h1 class="masthead-heading mb-0">The fastest way to learn</h1>
+                    <h2 class="masthead-subheading mb-0">The cleanest interface</h2>
+                    {% if user.is_authenticated %}
+                    <a href="/home" class="btn btn-primary btn-xl rounded-pill mt-5">Get Learning!</a>
+                    {% else %}
+                    <a href="/register" class="btn btn-primary btn-xl rounded-pill mt-5">Register</a>
+                    {% endif %}
+                </div>
+            </div>
+        </header>
+
+        <div id="scroll"></div>
+
+        <section>
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-6 order-lg-2">
+                        <div class="p-5">
+                            <img class="img-fluid rounded-circle" src="{% static 'img/info.png' %}" alt="">
+                        </div>
+                    </div>
+                    <div class="col-lg-6 order-lg-1">
+                        <div class="p-5">
+                            <h2 class="display-4">Lorem ipsum dolor sit amet</h2>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod aliquid, mollitia odio veniam sit iste esse assumenda amet aperiam exercitationem, ea animi blanditiis recusandae! Ratione voluptatum molestiae adipisci, beatae obcaecati.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-6">
+                        <div class="p-5">
+                            <img class="img-fluid rounded-circle" src="{% static 'img/info.png' %}" alt="">
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="p-5">
+                            <h2 class="display-4">Lorem ipsum dolor sit amet</h2>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod aliquid, mollitia odio veniam sit iste esse assumenda amet aperiam exercitationem, ea animi blanditiis recusandae! Ratione voluptatum molestiae adipisci, beatae obcaecati.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-6 order-lg-2">
+                        <div class="p-5">
+                            <img class="img-fluid rounded-circle" src="{% static 'img/info.png' %}" alt="">
+                        </div>
+                    </div>
+                    <div class="col-lg-6 order-lg-1">
+                        <div class="p-5">
+                            <h2 class="display-4">Lorem ipsum dolor sit amet</h2>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod aliquid, mollitia odio veniam sit iste esse assumenda amet aperiam exercitationem, ea animi blanditiis recusandae! Ratione voluptatum molestiae adipisci, beatae obcaecati.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-6">
+                        <div class="p-5">
+                            <img class="img-fluid rounded-circle" src="{% static 'img/info.png' %}" alt="">
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="p-5">
+                            <h2 class="display-4">Lorem ipsum dolor sit amet</h2>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod aliquid, mollitia odio veniam sit iste esse assumenda amet aperiam exercitationem, ea animi blanditiis recusandae! Ratione voluptatum molestiae adipisci, beatae obcaecati.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </body>
+
+    <!-- Footer -->
+    {% include 'app/footer.html' %}
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+
+    <!-- Navbar transparency transition -->
+    <script type="text/javascript">
+        $(window).scroll(function() {
+            var scrollTop = $(window).scrollTop();
+            if ( scrollTop > 100 ) {
+                $("#navbar").addClass("navbar-non-transparency");
+            }
+            else {
+                $("#navbar").removeClass("navbar-non-transparency");
+            }
+        });
+    </script>
+
+</html>

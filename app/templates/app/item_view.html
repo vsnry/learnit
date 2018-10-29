@@ -1,0 +1,107 @@
+{% extends "app/layout.html" %}
+
+{% block title %}
+    Item
+{% endblock %}
+
+{% block main %}
+    <!-- Load jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://raw.githubusercontent.com/kimmobrunfeldt/progressbar.js/master/dist/progressbar.min.js"></script>
+
+    <script>
+        function showModal(pk, item) {
+            jQuery.noConflict();
+            $(".modal-body").html("Are you sure you would like to remove '" + item + "'?");
+            $(".btn-primary").val(pk);
+            $("#exampleModalCenter").modal('show');
+        };
+    </script>
+
+    <script>
+        function confirmRemove() {
+            // TODO - Finish remove confirmation
+        }
+    </script>
+
+    <!-- Load jQuery -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+
+    <!-- Set the state of health bar -->
+    <script>
+        $(document).ready(function() {
+            var state = ({{ item.correct }} / ({{ item.correct }} + {{ item.incorrect }})) * $(".health-container").width();
+            $(".health-bar").width(state);
+        });
+    </script>
+
+    <br>
+
+    <nav class="breadcrumb"  aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">Home</a></li>
+            <li class="breadcrumb-item active"><a href="/items">Items</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{ item }}</li>
+        </ol>
+    </nav>
+
+    <div class="container white p-4 shadow">
+        <div class="heading-inline-links">
+            <h1>{{ item }}</h1>
+            <a href="{% url 'item_edit' pk=item.pk %}" class="inline-link"><i class="far fa-edit"></i></a>
+            <a href="javascript:void(0)" onclick="showModal({{ item.pk }}, '{{ item }}');" class="inline-link"><i class="far fa-trash-alt"></i></a>
+        </div>
+
+        <span class="badge badge-info">{{ item.list }}</span>
+        <br>
+
+        <br>
+
+        <div class="health-container">
+            <div class="health-bar"></div>
+        </div>
+
+        <br>
+
+        <h5>{{ item.secondary }}</h5>
+        <p>{{ item.comments }}</p>
+
+        <br>
+
+        <div class="stat-container">
+            <div class="stat-correct">
+                <b>{{ item.correct }}</b>
+            </div>
+            <small><b>Correct</b></small>
+        </div>
+        <div class="stat-container">
+            <div class="stat-incorrect">
+                <b>{{ item.incorrect }}</b>
+            </div>
+            <small><b>Incorrect</b></small>
+        </div>
+        <br>
+
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Are you sure?</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                Please confirm that you would like to delete [].
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" onclick="confirmRemove();">Confirm</button>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+
+{% endblock %}

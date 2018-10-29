@@ -1,0 +1,37 @@
+{% extends "app/layout.html" %}
+
+{% block title %}
+    Create List
+{% endblock %}
+
+{% block main %}
+    <br>
+
+    <nav class="breadcrumb"  aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">Home</a></li>
+            <li class="breadcrumb-item active"><a href="/lists">Lists</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Create List</li>
+        </ol>
+    </nav>
+
+    <div class="container-flex white p-4 shadow">
+        <h4><i class="far fa-plus-square"></i> Create List</h4>
+
+        <form method="post" action="{% url 'list_create' %}">
+        {% csrf_token %}
+
+            <div>
+                <span>{{ form.name.label_tag }}</span><br>
+                <span>{{ form.name }}</span>
+            </div>
+            <br>
+
+            <div>
+                <input type="submit" class="btn btn-primary" value="Save">
+                <a href="/lists" class="btn btn-light">Cancel</a>
+            </div>
+        </form>
+    </div>
+
+{% endblock %}

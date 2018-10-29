@@ -1,0 +1,19 @@
+{% extends "app/layout.html" %}
+{% load static %}
+
+{% block title %}
+    Error
+{% endblock %}
+
+{% block main %}
+
+    <div class="container" id="content">
+        <br>
+        <center>
+        <img src="{% static 'img/error.png' %}">
+        <br><br>
+        <a href="/">Go Back</a>
+        </center>
+    </div>
+
+{% endblock %}

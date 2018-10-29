@@ -1,0 +1,85 @@
+{% load static %}
+
+<!doctype html>
+<html lang="en">
+
+    <head>
+        <!-- Meta -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+        <!-- Override CSS -->
+        <link rel="stylesheet" href="{% static 'css/override.css' %}">
+
+        <!-- Google Fonts -->
+        <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Merriweather" rel="stylesheet">
+
+        <!-- Font Awesome Icons -->
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+
+        <title>App | {% block title %}{% endblock %}</title>
+    </head>
+
+    <body>
+        <!-- Navbar -->
+        <nav class="navbar navbar-expand-lg navbar-dark" id="navbar-master">
+            <a class="navbar-brand" href="/home">
+                <img src="{% static 'img/logo.png' %}" width="84" height="27" class="d-inline-block align-top logo-navbar" alt="">
+            </a>
+
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="/lists"><i class="fas fa-list"></i> Lists</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/items"><i class="fas fa-layer-group"></i> Items</a>
+                    </li>
+                    {% endif %}
+                </ul>
+                <form class="form-inline my-2 my-lg-0">
+                    <ul class="navbar-nav mr-auto">
+                        {% if user.is_authenticated %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="/account"><i class="fas fa-user"></i> {{ user }}</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/accounts/logout"><i class="fas fa-sign-out-alt"></i></a>
+                        </li>
+                        {% else %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="/accounts/login"><i class="fas fa-sign-in-alt"></i> Sign In</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/register"><i class="fas fa-user-plus"></i> Register</a>
+                        </li>
+                        {% endif %}
+                    </ul>
+                </form>
+            </div>
+        </nav>
+
+        <!-- Content -->
+        <div class="container extend-height">
+            {% block main %}{% endblock %}
+        </div>
+    </body>
+
+    <!-- Footer -->
+    {% include 'app/footer.html' %}
+
+    <!-- Load jQuery, Popper.js, Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+</html>

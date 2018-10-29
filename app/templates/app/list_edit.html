@@ -1,0 +1,40 @@
+{% extends "app/layout.html" %}
+
+{% block title %}
+    Edit List
+{% endblock %}
+
+{% block main %}
+    <br>
+
+    <nav class="breadcrumb"  aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">Home</a></li>
+            <li class="breadcrumb-item active"><a href="/items">Lists</a></li>
+            <li class="breadcrumb-item active"><a href="{% url 'list_view' pk=list.pk %}">{{ list }}</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Edit List</li>
+        </ol>
+    </nav>
+
+    <div class="container-flex white p-4 shadow">
+        <h4><i class="far fa-edit"></i> Edit List</h4>
+
+        <form method="post" action="{% url 'list_edit' pk=list.pk %}">
+        {% csrf_token %}
+
+            <div>
+                <span>{{ form.name.label_tag }}</span><br>
+                <span>{{ form.name }}</span>
+            </div>
+            <br>
+
+            <div>
+                <input type="submit" class="btn btn-primary" value="Save">
+
+                <!-- Change this to return to list view -->
+                <a href="{% url 'list_view' pk=list.pk %}" class="btn btn-light">Cancel</a>
+            </div>
+        </form>
+    </div>
+
+{% endblock %}

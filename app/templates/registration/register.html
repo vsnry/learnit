@@ -1,0 +1,43 @@
+{% extends "app/layout.html" %}
+
+{% block title %}
+    Register
+{% endblock %}
+
+{% block main %}
+    <br>
+    <div class="container-flex white p-4 shadow restrict-width">
+        <h4>REGISTER</h4>
+        <br>
+
+        {% if messages %}
+            <ul>
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+
+        <form method="post" action="{% url 'register' %}">
+        {% csrf_token %}
+
+            <div class="form-group">
+                <input class="form-control" id="{{ form.username.id_for_label }}" name="{{ form.username.html_name }}" type="text" placeholder="Username" />
+            </div>
+            <div class="form-group">
+                <input class="form-control" id="{{ form.password1.id_for_label }}" name="{{ form.password1.html_name }}" type="password" placeholder="Password" />
+            </div>
+            <div class="form-group">
+                <input class="form-control" id="{{ form.password2.id_for_label }}" name="{{ form.password2.html_name }}" type="password" placeholder="Confirm Password" />
+            </div>
+
+            <div>
+                <input type="submit" class="btn btn-primary" value="Register">
+            </div>
+        </form>
+        <br>
+
+        <small>Have an account already? <a href="/accounts/login">Sign In.</a></small>
+    </div>
+
+{% endblock %}

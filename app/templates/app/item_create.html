@@ -1,0 +1,51 @@
+{% extends "app/layout.html" %}
+
+{% block title %}
+    Create Item
+{% endblock %}
+
+{% block main %}
+    <br>
+
+    <nav class="breadcrumb"  aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">Home</a></li>
+            <li class="breadcrumb-item active"><a href="/items">Items</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Create Item</li>
+        </ol>
+    </nav>
+
+    <div class="container-flex white p-4 shadow">
+        <h4><i class="far fa-plus-square"></i> Create Item</h4>
+
+        {% if list %}
+            <form method="post" action="{% url 'item_create' pk=list.pk %}">
+        {% else %}
+            <form method="post" action="{% url 'item_create' %}">
+        {% endif %}
+        {% csrf_token %}
+
+            <div>
+                <span>{{ form.list.label_tag }}</span><br>
+                <span>{{ form.list }}</span><br>
+                <span>{{ form.primary.label_tag }}</span><br>
+                <span>{{ form.primary }}</span><br>
+                <span>{{ form.secondary.label_tag }}</span><br>
+                <span>{{ form.secondary }}</span><br>
+                <span>{{ form.comments.label_tag }}</span><br>
+                <span>{{ form.comments }}</span>
+            </div>
+            <br>
+
+            <div>
+                <input type="submit" class="btn btn-primary" value="Save">
+                {% if list %}
+                    <a href="{% url 'list_view' pk=list.pk %}" class="btn btn-light">Cancel</a>
+                {% else %}
+                    <a href="/items" class="btn btn-light">Cancel</a>
+                {% endif %}
+            </div>
+        </form>
+    </div>
+
+{% endblock %}

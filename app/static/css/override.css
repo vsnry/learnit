@@ -1,0 +1,317 @@
+/* App Wide - General */
+html, body {
+    background-color: #eeeeee;
+    height: 100%;
+}
+h1, h2, h5 {
+    color: #222222;
+    font-family: 'Raleway', sans-serif;
+}
+::-webkit-scrollbar {
+    width: 12px;
+}
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+::-webkit-scrollbar-thumb {
+    background: #888;
+}
+input {
+    max-width: 400px;
+}
+select {
+    max-width: 400px;
+}
+.white {
+    background-color: #ffffff;
+}
+.light-grey {
+    color: #999999;
+}
+
+/* App Wide - Buttons */
+.btn-primary {
+    background-color: #00cc73;
+    border-color: #00cc73;
+}
+.btn-primary:hover {
+    background-color: #333333;
+    color: #ffffff;
+    border: 1px solid #333333;
+}
+.btn-light:hover {
+    background-color: #333333;
+    color: #ffffff;
+    border: 1px solid #333333;
+}
+
+/* Master Layout */
+#navbar-master {
+    background-color: #00cc73;
+}
+.restrict-width {
+    max-width: 50%;
+}
+.nav-link {
+    color: #ffffff !important;
+    font-weight: bold;
+    font-family: 'Raleway', sans-serif;
+    font-size: 14px;
+}
+.breadcrumb {
+    background-color: #eeeeee;
+    padding: 0;
+    font-size: 12px;
+}
+a:hover {
+    color: #222222;
+    text-decoration: none;
+}
+.extend-height {
+    min-height: 100%;
+}
+.inline-link a {
+    padding-right: 0;
+}
+.heading-inline-title h4 {
+    display: inline-block;
+}
+.heading-inline-title a {
+    display: inline-block;
+}
+.float-right {
+    float: right;
+}
+.inline-link {
+    padding-right: 8px;
+}
+.item-actions {
+    text-align: right;
+}
+table, tr, td {
+    border-bottom: 1px solid #e5e5e5;
+}
+
+/* Home */
+.home-display {
+    background-color: #ffffff;
+}
+.secondary {
+    background-color: #ffffff;
+}
+.comments {
+    background-color: #ffffff;
+}
+#secondary-text {
+    opacity: 0;
+}
+#comments-text {
+    opacity: 0;
+}
+#lists-container {
+    background-color: #ffffff;
+}
+.controls-container {
+    width: 100%;
+}
+.control-container {
+    background-color: #333333;
+    width: 25%;
+    text-align: center;
+    display: inline-block;
+    height: 48px;
+}
+.control-btn {
+    color: #ffffff;
+}
+#control-correct {
+    background-color: #00cc73;
+}
+#control-incorrect {
+    background-color: #ff338c;
+}
+#lists {
+    max-height: 800px;
+    overflow-y: auto;
+}
+
+/* Item View */
+.health-container {
+    height: 8px;
+    min-width: 100px;
+    width: 50%;
+    background-color: #d8d8d8;
+}
+.health-bar {
+    background-color: #00cc73;
+    height: 100%;
+}
+.stat-container {
+    text-align: center;
+    width: 100px;
+    display: inline-block;
+    margin-right: 24px;
+}
+.stat-correct {
+    width: 100%;
+    height: 100px;
+    background-color: #00cc73;
+    border-radius: 50px;
+    color: #ffffff;
+    font-size: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.stat-incorrect {
+    width: 100px;
+    height: 100px;
+    background-color: #ff338c;
+    border-radius: 50px;
+    color: #ffffff;
+    font-size: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Footer */
+footer {
+    background-color: #222222;
+    color: #ffffff;
+}
+.footer-item a:hover {
+    color: #ffffff;
+}
+.footer-link {
+    color: #ffffff;
+}
+
+/* Landing */
+
+/*
+The MIT License (MIT)
+
+Copyright (c) 2013-2018 Blackrock Digital LLC
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
+*/
+
+.btn-xl {
+  text-transform: uppercase;
+  padding: 1.5rem 3rem;
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 0.1rem;
+}
+
+.bg-black {
+  background-color: #000 !important;
+}
+
+.rounded-pill {
+  border-radius: 5rem;
+}
+
+.navbar-custom {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.navbar-non-transparency {
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+.navbar-custom .navbar-brand {
+  text-transform: uppercase;
+  font-size: 1rem;
+  letter-spacing: 0.1rem;
+  font-weight: 700;
+}
+
+.navbar-custom .navbar-nav .nav-item .nav-link {
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.1rem;
+}
+
+header.masthead {
+  position: relative;
+  overflow: hidden;
+  padding-top: calc(7rem + 72px);
+  padding-bottom: 7rem;
+  background: url("/static/img/hero.jpg");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-attachment: scroll;
+  background-size: cover;
+}
+
+header.masthead .masthead-content {
+  z-index: 1;
+  position: relative;
+}
+
+header.masthead .masthead-content .masthead-heading {
+  font-size: 4rem;
+}
+
+header.masthead .masthead-content .masthead-subheading {
+  font-size: 2rem;
+}
+
+@media (min-width: 992px) {
+  header.masthead {
+    padding-top: calc(10rem + 55px);
+    padding-bottom: 10rem;
+  }
+  header.masthead .masthead-content .masthead-heading {
+    font-size: 6rem;
+  }
+  header.masthead .masthead-content .masthead-subheading {
+    font-size: 4rem;
+  }
+}
+
+.bg-primary {
+  background-color: #f6f6f6 !important;
+}
+
+.btn-primary {
+  background-color: #00cc73;
+  border-color: #00cc73;
+}
+.btn-primary:active {
+  background-color: #00cc73;
+  border-color: #00cc73;
+}
+.btn-primary:focus {
+  background-color: #00cc73;
+  border-color: #00cc73;
+}
+.mb-0 {
+    color: #ffffff;
+}
+.landing-signin {
+    color: #ffffff;
+}
+.landing-signin:hover {
+    color: #ffffff;
+    text-decoration: underline;
+}

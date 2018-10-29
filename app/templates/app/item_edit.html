@@ -1,0 +1,46 @@
+{% extends "app/layout.html" %}
+
+{% block title %}
+    Edit Item
+{% endblock %}
+
+{% block main %}
+    <br>
+
+    <nav class="breadcrumb"  aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">Home</a></li>
+            <li class="breadcrumb-item active"><a href="/items">Items</a></li>
+            <li class="breadcrumb-item active"><a href="{% url 'item_view' pk=item.pk %}">{{ item }}</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Edit Item</li>
+        </ol>
+    </nav>
+
+    <div class="container-flex white p-4 shadow">
+        <h4><i class="far fa-edit"></i> Edit Item</h4>
+
+        <form method="post" action="{% url 'item_edit' pk=item.pk %}">
+        {% csrf_token %}
+
+            <div>
+                <span>{{ form.list.label_tag }}</span><br>
+                <span>{{ form.list }}</span><br>
+                <span>{{ form.primary.label_tag }}</span><br>
+                <span>{{ form.primary }}</span><br>
+                <span>{{ form.secondary.label_tag }}</span><br>
+                <span>{{ form.secondary }}</span><br>
+                <span>{{ form.comments.label_tag }}</span><br>
+                <span>{{ form.comments }}</span>
+            </div>
+            <br>
+
+            <div>
+                <input type="submit" class="btn btn-primary" value="Save">
+
+                <!-- Change this to return to item view -->
+                <a href="{% url 'item_view' pk=item.pk %}" class="btn btn-light">Cancel</a>
+            </div>
+        </form>
+    </div>
+
+{% endblock %}
