@@ -9,19 +9,24 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://raw.githubusercontent.com/kimmobrunfeldt/progressbar.js/master/dist/progressbar.min.js"></script>
 
+    <!-- Handle remove modal -->
     <script>
-        function showModal(pk, item) {
+        function showModal() {
             jQuery.noConflict();
-            $(".modal-body").html("Are you sure you would like to remove '" + item + "'?");
-            $(".btn-primary").val(pk);
-            $("#exampleModalCenter").modal('show');
+            $(".modal-body").html("Are you sure you would like to remove <b>" + "{{ item }}" + "</b>?");
+            $("#confirm-remove").find('.btn-primary').attr('onclick', "window.location='/item_remove/{{ item.pk }}';");
+            $("#confirm-remove").modal('show');
         };
     </script>
 
+    <!-- Handle reset modal -->
     <script>
-        function confirmRemove() {
-            // TODO - Finish remove confirmation
-        }
+        function showResetModal() {
+            jQuery.noConflict();
+            $(".modal-body").html("Are you sure you would like to reset the statistics for <b>" + "{{ item }}" + "</b>?");
+            $("#confirm-remove").find('.btn-primary').attr('onclick', "window.location='/item/reset_stats/{{ item.pk }}';");
+            $("#confirm-remove").modal('show');
+        };
     </script>
 
     <!-- Load jQuery -->
@@ -30,8 +35,13 @@
     <!-- Set the state of health bar -->
     <script>
         $(document).ready(function() {
-            var state = ({{ item.correct }} / ({{ item.correct }} + {{ item.incorrect }})) * $(".health-container").width();
-            $(".health-bar").width(state);
+            $(".health-bar").width(state + "%");
+            if (state <= 50 && state > 25) {
+                $(".health-bar").css('background-color', '#ffae00');
+            }
+            else if (state <= 25){
+                $(".health-bar").css('background-color', '#ff338c');
+            }
         });
     </script>
 
@@ -49,10 +59,11 @@
         <div class="heading-inline-links">
             <h1>{{ item }}</h1>
             <a href="{% url 'item_edit' pk=item.pk %}" class="inline-link"><i class="far fa-edit"></i></a>
-            <a href="javascript:void(0)" onclick="showModal({{ item.pk }}, '{{ item }}');" class="inline-link"><i class="far fa-trash-alt"></i></a>
+            <a href="javascript:void(0)" onclick="showModal();" class="inline-link"><i class="far fa-trash-alt"></i></a>
         </div>
 
-        <span class="badge badge-info">{{ item.list }}</span>
+        <br>
+        <span class="badge badge-info"><a href="{% url 'list_view' pk=item.list.pk %}">{{ item.list }}</a></span>
         <br>
 
         <br>
@@ -81,13 +92,17 @@
             <small><b>Incorrect</b></small>
         </div>
         <br>
+        <br>
+
+        <small><a href="javascript:void(0)" onclick="showResetModal();">Reset Status</a></small>
+        <br>
 
         <!-- Modal -->
-        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal fade" id="confirm-remove" tabindex="-1" role="dialog" aria-labelledby="confirm-remove-label" aria-hidden="true">
           <div class="modal-dialog" role="document">
             <div class="modal-content">
               <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle">Are you sure?</h5>
+                <h5 class="modal-title" id="confirm-remove-title">Are you sure?</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
@@ -97,7 +112,7 @@
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" onclick="confirmRemove();">Confirm</button>
+                <button type="button" class="btn btn-primary">Confirm</button>
               </div>
             </div>
           </div>

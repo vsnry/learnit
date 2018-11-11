@@ -10,6 +10,9 @@
 
         <title>LearnIt | Home</title>
 
+        <!-- Favicon -->
+        <link rel="icon" type="image/png" sizes="16x16" href="{% static 'img/favicon.png' %}">
+
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 
@@ -20,35 +23,21 @@
         <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Merriweather" rel="stylesheet">
 
+        <!-- Load bootstrap-select CSS -->
+        <link rel="stylesheet" href="{% static 'bootstrap-select/css/bootstrap-select.css' %}">
+
         <!-- Override CSS -->
         <link rel="stylesheet" href="{% static 'css/override.css' %}">
 
         <!-- Load jQuery -->
-        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-
-        <!-- Handle Select All and Select None buttons -->
-        <script>
-            function selectAll() {
-                $("input:checkbox").prop('checked', true);
-            }
-            function selectNone() {
-                $("input:checkbox").prop('checked', false);
-            }
-        </script>
 
         <!-- Handle Reveal / Next Item event -->
         <script>
             function revealNext() {
-                if (document.getElementById("comments-text").style.opacity == 1.0) {
-                    document.getElementById("reveal-next").innerHTML = "Reveal";
-                    getItem();
-                }
-                else {
-                    document.getElementById("reveal-next").innerHTML = "Next";
-                    document.getElementById("secondary-text").style.opacity = "1.0";
-                    document.getElementById("comments-text").style.opacity = "1.0";
-                }
+                document.getElementById("secondary-text").style.opacity = "1.0";
+                document.getElementById("comments-text").style.opacity = "1.0";
             }
         </script>
 
@@ -57,8 +46,9 @@
             function getItem() {
 
                 var lists = [];
-                $('.form-check input[type="checkbox"]:checked').each(function() {
-                    lists.push($(this).attr("value"));
+
+                $('.selectpicker option:selected').each(function(){
+                    lists.push($(this).attr("label"));
                 });
 
                 $.ajax({
@@ -76,6 +66,7 @@
                         document.getElementById("primary-text").innerHTML = data["item"]["primary"];
                         document.getElementById("secondary-text").innerHTML = data["item"]["secondary"];
                         document.getElementById("comments-text").innerHTML = data["item"]["comments"];
+                        document.getElementById("badge").innerHTML = data["item"]["list"];
                     }
                 });
             };
@@ -88,32 +79,58 @@
         <!-- Handle Mark Correct event -->
         <script>
             function markCorrect() {
-                var pk = document.getElementsByClassName("home-display shadow p-5")[0].getAttribute("id");
+                if (document.getElementById("secondary-text").style.opacity == 1.0) {
+                    var pk = document.getElementsByClassName("home-display shadow p-5")[0].getAttribute("id");
 
-                $.ajax({
-                    type: "POST",
-                    url: "http://127.0.0.1:8000/ajax/mark_correct/",
-                    data: JSON.stringify({item: pk}),
-                    beforeSend: function(xhr){ xhr.setRequestHeader('X-CSRFToken', '{{ csrf_token }}');},
-                    contentType: "application/json; charset=utf-8"
-                });
-
+                    $.ajax({
+                        type: "POST",
+                        url: "http://127.0.0.1:8000/ajax/mark_correct/",
+                        data: JSON.stringify({item: pk}),
+                        beforeSend: function(xhr){ xhr.setRequestHeader('X-CSRFToken', '{{ csrf_token }}');},
+                        contentType: "application/json; charset=utf-8"
+                    });
+                    getItem();
+                }
             }
         </script>
 
         <!-- Handle Mark Incorrect event -->
         <script>
             function markIncorrect() {
-                var pk = document.getElementsByClassName("home-display shadow p-5")[0].getAttribute("id");
+                if (document.getElementById("secondary-text").style.opacity == 1.0) {
+                    var pk = document.getElementsByClassName("home-display shadow p-5")[0].getAttribute("id");
 
-                $.ajax({
-                    type: "POST",
-                    url: "http://127.0.0.1:8000/ajax/mark_incorrect/",
-                    data: JSON.stringify({item: pk}),
-                    beforeSend: function(xhr){ xhr.setRequestHeader('X-CSRFToken', '{{ csrf_token }}');},
-                    contentType: "application/json; charset=utf-8"
-                });
+                    $.ajax({
+                        type: "POST",
+                        url: "http://127.0.0.1:8000/ajax/mark_incorrect/",
+                        data: JSON.stringify({item: pk}),
+                        beforeSend: function(xhr){ xhr.setRequestHeader('X-CSRFToken', '{{ csrf_token }}');},
+                        contentType: "application/json; charset=utf-8"
+                    });
+                    getItem();
+                }
+            }
+        </script>
 
+        <!-- Handle keyboard events -->
+        <script>
+            document.onkeydown = checkKey;
+
+            function checkKey(e) {
+
+                e = e || window.event;
+
+                if (e.keyCode == '39') {
+                    revealNext();
+                }
+                else if (e.keyCode == '38') {
+                    e.preventDefault();
+                    markCorrect();
+                }
+                else if (e.keyCode == '40') {
+                    e.preventDefault();
+                    markIncorrect();
+                }
             }
         </script>
     </head>
@@ -162,59 +179,70 @@
             </div>
         </nav>
 
-        <div class="extend-height">
-            <div class="row extend-height">
-                <div class="col-2">
-                    <div class="container" id="lists-container">
-                        <br>
-                        <h5>Lists</h5>
-                        <a href="javascript:void(0)" onclick="selectAll();"><small>Select All</small></a> |
-                        <a href="javascript:void(0)" onclick="selectNone();"><small>Select None</small></a><br>
-                        <hr>
+        <div class="container extend-height">
+            <br>
 
-                        <div id="lists">
-                            <form>
-                                <div class="form-check">
-                                    <input type="checkbox" class="form-check-input" id="least-frequent" value="998">
-                                    <label class="form-check-label" for="least-frequent">Least Frequent</label>
-                                </div>
-                                <div class="form-check">
-                                    <input type="checkbox" class="form-check-input" id="most-difficult" value="999">
-                                    <label class="form-check-label" for="most-difficult">Most Difficult</label>
-                                </div>
-                                {% for item in lists %}
-                                    <div class="form-check">
-                                        <input type="checkbox" class="form-check-input" id="{{ item.name }}" value="{{ item.id }}" checked>
-                                        <label class="form-check-label" for="{{ item.name }}">{{ item.name }}</label>
-                                    </div>
-                                {% endfor %}
-                            </form>
-                            <br>
-                        </div>
-                    </div>
-                </div>
+            <nav class="breadcrumb"  aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/home">Home</a></li>
+                </ol>
+            </nav>
 
-                <div class="col-8">
-                    <br>
-                    <div class="home-display shadow p-5">
-                        <h1><span id="primary-text"></span></h1>
-                        <hr>
-                        <br>
-                        <h2><span id="secondary-text"></span></h2>
-                        <br>
-                        <h5><span id="comments-text"></span></h5>
-                        <br>
-                        <a href="javascript:void(0)" class="btn btn-primary control-btn" onclick="revealNext();" id="reveal-next"><i class="fas fa-angle-double-right"></i> Reveal</a>
-                        <a href="javascript:void(0)" class="btn btn-primary control-btn" id="mark-correct" onclick="markCorrect();"><i class="fas fa-check"></i> Mark Correct</a>
-                        <a href="javascript:void(0)" class="btn btn-primary control-btn" id="mark-incorrect" onclick="markIncorrect();"><i class="fas fa-times"></i> Mark Incorrect</a>
-                    </div>
-
-                </div>
-
-                <div class="col-2">
-                </div>
+            <div class="home-display shadow p-5">
+                <h1><span id="primary-text"></span></h1>
+                <hr>
+                <span class="badge badge-info" id="badge"></span>
+                <br>
+                <br>
+                <h2><span id="secondary-text"></span></h2>
+                <br>
+                <h5><span id="comments-text"></span></h5>
             </div>
+
+            <br>
+
+            <select class="selectpicker" multiple data-actions-box="true" data-selected-text-format="count > 3" id="select-picker">
+                <option label="998">Least Freqeuent</option>
+                <option label="999">Most Difficult</option>
+                {% for item in lists %}
+                    <option label="{{ item.pk }}">{{ item }}</option>
+                {% endfor %}
+            </select>
+
+            <br>
+            <br>
+
+            <div class="actions">
+                <a href="javascript:void(0)" class="shadow" onclick="revealNext();" id="reveal-next">Reveal</a>
+                <a href="javascript:void(0)" class="shadow" id="mark-correct" onclick="markCorrect();">Correct</a>
+                <a href="javascript:void(0)" class="shadow" id="mark-incorrect" onclick="markIncorrect();">Incorrect</a>
+            </div>
+
+            <br>
+            <center><small style="color: #999999;"><strong>Hint:</strong> Keyboard buttons may also be used for navigation.
+            <strong>Reveal</strong> (right), <strong>Correct</strong> (up), <strong>Incorrect</strong> (down).</small></center>
         </div>
+        <br>
+
+        <!-- Latest compiled and minified JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.bundle.min.js"></script>
+
+        <!-- Load bootstrap-select JS -->
+        <script src="{% static 'bootstrap-select/js/bootstrap-select.js' %}"></script>
+
+        <!-- Select default multiselect options -->
+        <script>
+            $('.selectpicker').selectpicker();
+
+            var lists = [];
+            target = document.getElementById('select-picker');
+            var i;
+            for (i = 0; i < target.length; i++) {
+                lists.push(target.options[i].text);
+            }
+
+            $('.selectpicker').selectpicker('val', lists.slice(2, lists.length));
+        </script>
     </body>
 
     <!-- Footer -->

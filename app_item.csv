@@ -1,0 +1,145 @@
+id,primary,secondary,comments,list_id,correct,occur,incorrect,date_created
+51,sal,salt,no comments,27,7,57,1,33:29.7
+53,boleto,ticket,,27,2,5,0,1/11/2018 1:33
+54,cafe,coffee,,27,1,3,0,1/11/2018 1:33
+55,huevo,egg,,27,2,3,1,1/11/2018 1:33
+56,cebolla,onion,,27,1,4,2,1/11/2018 1:33
+57,colega,colleague,,27,0,0,0,6/11/2018 13:24
+58,el tomate,tomato,,27,0,0,0,6/11/2018 13:24
+59,la cancion,song,,27,0,0,0,6/11/2018 13:24
+60,la amistad,friendship,,27,0,0,0,6/11/2018 13:24
+61,la bolsa,bag,,27,0,0,0,6/11/2018 13:24
+62,la ventana,window,,27,0,0,0,6/11/2018 13:24
+63,la mesa,table,,27,0,0,0,6/11/2018 13:24
+64,el idioma,language,,27,0,0,0,6/11/2018 13:24
+65,la leccion,lesson,,27,0,0,0,6/11/2018 13:24
+66,taxista,taxi driver,,27,0,0,0,6/11/2018 13:24
+67,la silla,chair,,27,0,0,0,6/11/2018 13:24
+68,la luz,light,,27,0,0,0,6/11/2018 13:24
+69,el espejo,mirror,,27,0,0,0,6/11/2018 13:24
+70,el jardin,garden,,27,0,0,0,6/11/2018 13:24
+71,el sillon,armchair,,27,0,0,0,6/11/2018 13:24
+72,la biblioteca,library,,27,0,0,0,6/11/2018 13:24
+73,la libreria,bookstore,,27,0,0,0,6/11/2018 13:24
+74,la maleta,suitcase,,27,0,0,0,6/11/2018 13:24
+75,la pluma,pen,,27,0,0,0,6/11/2018 13:24
+76,el barco,boat,,27,0,0,0,6/11/2018 13:24
+77,la verdad,truth,,27,0,0,0,6/11/2018 13:24
+78,el planeta,planet,,27,0,0,0,6/11/2018 13:24
+79,norte,north,,27,0,0,0,6/11/2018 13:24
+80,sur,south,,27,0,0,0,6/11/2018 13:24
+81,este,east,,27,0,0,0,6/11/2018 13:24
+82,oeste,west,,27,0,0,0,6/11/2018 13:24
+83,el ano,year,,27,0,0,0,6/11/2018 13:24
+84,el arbol,tree,,27,0,0,0,6/11/2018 13:24
+85,el escensor,elevator,,27,0,0,0,6/11/2018 13:24
+86,el avion,airplane,,27,0,0,0,6/11/2018 13:24
+87,el campo,countryside,,27,0,0,0,6/11/2018 13:24
+88,el coche,car,,27,0,0,0,6/11/2018 13:24
+89,el cuarto,room,,27,0,0,0,6/11/2018 13:24
+90,el cumpleanos,birthday,,27,0,0,0,6/11/2018 13:24
+91,el equipaje,baggage,,27,0,0,0,6/11/2018 13:24
+92,el hogar,home,,27,0,0,0,6/11/2018 13:24
+93,el mensaje,message,,27,0,0,0,6/11/2018 13:24
+94,el pais,country,,27,0,0,0,6/11/2018 13:24
+95,el papel,paper,,27,0,0,0,6/11/2018 13:24
+96,el periodica,newspaper,,27,0,0,0,6/11/2018 13:24
+97,el piso,floor,,27,0,0,0,6/11/2018 13:24
+98,el precio,price,,27,0,0,0,6/11/2018 13:24
+99,el ruido,noise,,27,0,0,0,6/11/2018 13:24
+100,el sito,place,,27,0,0,0,6/11/2018 13:24
+101,el sueno,dream,,27,0,0,0,6/11/2018 13:24
+102,el teatro,theatre,,27,0,0,0,6/11/2018 13:24
+103,el tema,theme,,27,0,0,0,6/11/2018 13:24
+104,el viaje,trip,,27,0,0,0,6/11/2018 13:24
+105,la avenida,avenue,,27,0,0,0,6/11/2018 13:24
+106,la calle,street,,27,0,0,0,6/11/2018 13:24
+107,la camisa,shirt,,27,0,0,0,6/11/2018 13:24
+108,la carta,letter,,27,0,0,0,6/11/2018 13:24
+109,la cocina,kitchen,,27,0,0,0,6/11/2018 13:24
+110,la ducha,shower,,27,0,0,0,6/11/2018 13:24
+111,la entrada,entrance,,27,0,0,0,6/11/2018 13:24
+112,la escalera,stairs,,27,0,0,0,6/11/2018 13:24
+113,la escuela,school,,27,0,0,0,6/11/2018 13:24
+114,la fiesta,party,,27,0,0,0,6/11/2018 13:24
+115,la frase,sentence,,27,0,0,0,6/11/2018 13:24
+116,la gente,people,,27,0,0,0,6/11/2018 13:24
+117,la guerra,war,,27,0,0,0,6/11/2018 13:24
+118,la habitacion,room,,27,0,0,0,6/11/2018 13:24
+119,la hoja,leaf,,27,0,0,0,6/11/2018 13:24
+120,la llave,key,,27,0,0,0,6/11/2018 13:24
+121,la medicina,medicine,,27,0,0,0,6/11/2018 13:24
+122,la pagina,page,,27,0,0,0,6/11/2018 13:24
+123,la palabra,word,,27,0,0,0,6/11/2018 13:24
+124,la pared,wall,,27,0,0,0,6/11/2018 13:24
+125,la playa,beach,,27,0,0,0,6/11/2018 13:24
+126,la pregunta,question,,27,0,0,0,6/11/2018 13:24
+127,la puerta,door,,27,0,0,0,6/11/2018 13:24
+128,la salida,exit,,27,0,0,0,6/11/2018 13:24
+129,la salud,health,,27,0,0,0,6/11/2018 13:24
+130,el cine,cinema,,27,0,0,0,6/11/2018 13:24
+131,la pelicula,film,,27,0,0,0,6/11/2018 13:24
+132,la pobreza,poverty,,27,0,0,0,6/11/2018 13:24
+133,el juez,judge,,27,0,0,0,6/11/2018 13:24
+134,el premio,award,,27,0,0,0,6/11/2018 13:24
+135,el dia de fiesta,holiday,,27,0,0,0,6/11/2018 13:24
+136,la bebida,drink,,27,0,0,0,6/11/2018 13:24
+137,el camarero,waiter,,27,0,0,0,6/11/2018 13:24
+138,el trabajo,work,,27,0,0,0,6/11/2018 13:24
+139,el plato,plate,,27,0,0,0,6/11/2018 13:24
+140,el almuerzo,lunch,,27,0,0,0,6/11/2018 13:24
+141,la cena,supper,,27,0,0,0,6/11/2018 13:24
+142,el cheque,check,,27,0,0,0,6/11/2018 13:24
+143,el comedor,dining room,,27,0,0,0,6/11/2018 13:24
+144,la comida,meal,,27,0,0,0,6/11/2018 13:24
+145,la cuchara,spoon,,27,0,0,0,6/11/2018 13:24
+146,el cuchillo,knife,,27,0,0,0,6/11/2018 13:24
+147,la cuenta,"check, bill",,27,0,0,0,6/11/2018 13:24
+148,el desayuno,breakfast,,27,0,0,0,6/11/2018 13:24
+149,el impuesto,tax,,27,0,0,0,6/11/2018 13:24
+150,el mantel,tablecloth,,27,0,0,0,6/11/2018 13:24
+151,el menu,menu,,27,0,0,0,6/11/2018 13:24
+152,el mozo,waiter,,27,0,0,0,6/11/2018 13:24
+153,la propina,tip,,27,0,0,0,6/11/2018 13:24
+154,la servilleta,napkin,,27,0,0,0,6/11/2018 13:24
+155,el tenedor,fork,,27,0,0,0,6/11/2018 13:24
+156,el vaso,glass,,27,0,0,0,6/11/2018 13:24
+157,la almohada,pillow,,27,0,0,0,6/11/2018 13:24
+158,la aspiradora,vacuum cleaner,,27,0,0,0,6/11/2018 13:24
+159,el desorden,mess,,27,0,0,0,6/11/2018 13:24
+160,el dormitorio,bedroom,,27,0,0,0,6/11/2018 13:24
+161,la escoba,broom,,27,0,0,0,6/11/2018 13:24
+162,la esponja,sponge,,27,0,0,0,6/11/2018 13:24
+163,el helado,ice cream,,27,0,0,0,6/11/2018 13:24
+164,el lavaplatos,dishwasher,,27,0,0,0,6/11/2018 13:24
+165,la mancha,stain,,27,0,0,0,6/11/2018 13:24
+166,el polvo,dust,,27,0,0,0,6/11/2018 13:24
+167,la sabana,sheet,,27,0,0,0,6/11/2018 13:24
+168,la nevera,fridge,,27,0,0,0,6/11/2018 13:24
+169,el salon,living room,,27,0,0,0,6/11/2018 13:24
+170,la alfombra,carpet,,27,0,0,0,6/11/2018 13:24
+171,la torta,cake,,27,0,0,0,6/11/2018 13:24
+172,el postre,dessert,,27,0,0,0,6/11/2018 13:24
+173,la quimica,chemistry,,27,0,0,0,6/11/2018 13:24
+174,el tiempo,time,,27,0,0,0,6/11/2018 13:24
+175,la paz,peace,,27,0,0,0,6/11/2018 13:24
+176,el verano,summer,,27,0,0,0,6/11/2018 13:24
+177,el estilo,style,,27,0,0,0,6/11/2018 13:24
+178,la iglesia,church,,27,0,0,0,6/11/2018 13:24
+179,la milla,mile,,27,0,0,0,6/11/2018 13:24
+180,la toma,taking,,27,0,0,0,6/11/2018 13:24
+181,el curso,course,,27,0,0,0,6/11/2018 13:24
+182,la respiracion,breath,,27,0,0,0,6/11/2018 13:24
+183,el deporte,sport,,27,0,0,0,6/11/2018 13:24
+184,la sonrisa,smile,,27,0,0,0,6/11/2018 13:24
+185,el lado,side,,27,0,0,0,6/11/2018 13:24
+186,el amor,love,,27,0,0,0,6/11/2018 13:24
+187,el trato,treatment,,27,0,0,0,6/11/2018 13:24
+188,la notebook,notebook,,27,0,0,0,6/11/2018 13:24
+189,la muchedumbre,crowd,,27,0,0,0,6/11/2018 13:24
+190,el sotano,basement,,27,0,0,0,6/11/2018 13:24
+191,la farmacia,pharmacy,,27,0,0,0,6/11/2018 13:24
+192,la tienda,shop,,27,0,0,0,6/11/2018 13:24
+193,el camino,path,,27,0,0,0,6/11/2018 13:24
+194,la hora pico,rush hour,,27,0,0,0,6/11/2018 13:24
+195,el asiento,seat,,27,0,0,0,6/11/2018 13:24

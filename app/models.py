@@ -15,6 +15,10 @@ class List(models.Model):
     name = models.CharField(max_length=64)
     date_created = models.DateTimeField(default=timezone.now())
 
+    def get_item_count(self):
+        item_count = len(Item.objects.filter(list=self))
+        return item_count
+
     def __str__(self):
         return '%s' % (self.name)
 

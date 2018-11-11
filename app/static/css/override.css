@@ -121,17 +121,29 @@ table, tr, td {
     display: inline-block;
     height: 48px;
 }
-.control-btn {
-    color: #ffffff;
+.actions {
+    text-align: center;
 }
-#control-correct {
+.actions a {
+    background-color: #222222;
+    color: #ffffff;
+    width: 30%;
+    display: inline-block;
+    height: 200px;
+    border-radius: 4px;
+    text-align: center;
+    padding-top: 88px;
+    font-family: 'Raleway', sans-serif;
+    font-size: 24px;
+}
+#mark-correct {
     background-color: #00cc73;
 }
-#control-incorrect {
+#mark-incorrect {
     background-color: #ff338c;
 }
 #lists {
-    max-height: 800px;
+    max-height: 200px;
     overflow-y: auto;
 }
 
@@ -173,6 +185,18 @@ table, tr, td {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+.heading-inline-links h1 {
+    display: inline;
+}
+.heading-inline-links a {
+    display: inline;
+}
+.inline-link {
+    padding-right: 0;
+}
+.badge a {
+    color: #ffffff;
 }
 
 /* Footer */
@@ -314,4 +338,30 @@ header.masthead .masthead-content .masthead-subheading {
 .landing-signin:hover {
     color: #ffffff;
     text-decoration: underline;
+}
+
+/* Data Table */
+#data-table_info {
+    font-size: 12px;
+    background-color: #eeeeee;
+}
+#data-table_paginate {
+    background-color: #eeeeee;
+}
+.pagination {
+    text-align: right;
+}
+#data-table_wrapper {
+    background-color: #eeeeee;
+}
+#data-table {
+    background-color: #ffffff;
+}
+#data-table_length {
+    font-size: 12px;
+    float: left;
+}
+#data-table_filter {
+    font-size: 12px;
+    float: right;
 }

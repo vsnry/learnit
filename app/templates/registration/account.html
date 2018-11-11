@@ -5,6 +5,16 @@
 {% endblock %}
 
 {% block main %}
+    <!-- Handle modal -->
+    <script>
+        function showModal() {
+            jQuery.noConflict();
+            $(".modal-body").html("Are you sure that you would like to remove this account?<br><small>Please be aware that this action is final and cannot be undone.</small>");
+            $("#confirm-remove").find('.btn-primary').attr('onclick', "window.location='/account/remove/'");
+            $("#confirm-remove").modal('show');
+        };
+    </script>
+
     <br>
 
     <nav class="breadcrumb" aria-label="breadcrumb">
@@ -17,39 +27,35 @@
     <div class="container-flex white p-4 shadow">
         <h4><i class="fas fa-user"></i> {{ user }}</h4>
 
+        <br>
+
         <a href="#" class="btn btn-primary">Change Password</a>
         <br>
         <br>
-        <h5>Reset Statistics</h5>
+        <small><a href="javascript:void(0)" onclick="showModal();">Remove Account</a></small>
+        <br>
+
     </div>
 
-    <div class="container-flex white">
-        <table class="table table-striped table-borderless shadow">
-            <thead>
-                <tr>
-                    <th scope="col" class="p-4">LIST</th>
-                    <th scope="col" class="item-actions p-4"></th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td class="px-4">All</td>
-                    <td class="item-actions px-4">
-                        <a href="#"><i class="fas fa-redo"></i></a>
-                    </td>
-                </tr>
-            {% for list in query %}
-                <tr>
-                    <td class="px-4">{{ list }}</td>
-                    <td class="item-actions px-4">
-                        <a href="{% url 'reset_stats' pk=list.pk %}"><i class="fas fa-redo"></i></a>
-                    </td>
-                </tr>
-            {% endfor %}
-            </tbody>
-        </table>
+    <!-- Modal -->
+    <div class="modal fade" id="confirm-remove" tabindex="-1" role="dialog" aria-labelledby="confirm-remove-label" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="confirm-remove-title">Are you sure?</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            Please confirm that you would like to delete [].
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Confirm</button>
+          </div>
+        </div>
+      </div>
     </div>
-    <br>
-    <br>
 
 {% endblock %}

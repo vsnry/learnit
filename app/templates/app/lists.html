@@ -1,4 +1,5 @@
 {% extends "app/layout.html" %}
+{% load static %}
 
 {% block title %}
     Lists
@@ -7,30 +8,28 @@
 {% block main %}
     <!-- Load jQuery -->
     <script type="text/javascript" language="javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
-    <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
-	<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
 
-    <script>
+    <script type="text/javascript" src="{% static 'DataTables/datatables.js' %}"></script>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+    <!-- Override CSS -->
+    <link rel="stylesheet" href="{% static 'css/override.css' %}">
+
+    <!-- Handle modal -->
+    <script type="text/javascript">
         function showModal(pk, list) {
-            jQuery.noConflict();
-            $(".modal-body").html("Are you sure you would like to remove '" + list + "'?");
-            $(".btn-primary").val(pk);
-            $("#exampleModalCenter").modal('show');
+            $(".modal-body").html("Are you sure you would like to remove <b>" + list + "</b>?");
+            $("#confirm-remove").find('.btn-primary').attr('onclick', "window.location='/list_remove/" + pk + "'");
+            $("#confirm-remove").modal('show');
         };
     </script>
 
-    <script>
-        function confirmRemove() {
-            // TODO - Finish remove confirmation
-        }
-    </script>
-
-    <!-- Initialise DataTables -->
-    <script>
+    <script type="text/javascript">
         $(document).ready(function() {
-            jQuery.noConflict();
             $('#data-table').DataTable();
-        });
+        } );
     </script>
 
     <br>
@@ -59,15 +58,27 @@
                 </tr>
             </thead>
             <tbody>
-            {% for item in query %}
+            {% if query %}
+                {% for item in query %}
+                    <tr>
+                        <td class="px-4"><a href="{% url 'list_view' pk=item.pk %}">{{ item }}</a></td>
+                        <td class="px-4">{{ item.get_item_count }}</td>
+                        <td class="item-actions px-4">
+                            <a href="javascript:void(0)" onclick="showModal('{{ item.pk }}', '{{ item }}');"><i class="far fa-trash-alt"></i></a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            {% else %}
                 <tr>
-                    <td class="px-4"><a href="{% url 'list_view' pk=item.pk %}">{{ item }}</a></td>
-                    <td class="px-4">todo</td>
-                    <td class="item-actions px-4">
-                        <a href="javascript:void(0)" onclick="showModal({{ item.pk }}, '{{ item }}');"><i class="far fa-trash-alt"></i></a>
+                    <td class="px-4">
+                        <a href="{% url 'list_create' %}">Add a list...</a>
                     </td>
+                    <td class="px-4"></td>
+                    <td class="px-4"></td>
+                    <td class="px-4"></td>
+                    <td class="px-4"></td>
                 </tr>
-            {% endfor %}
+            {% endif %}
             </tbody>
         </table>
     </div>
@@ -75,11 +86,11 @@
     <br>
 
     <!-- Modal -->
-    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal fade" id="confirm-remove" tabindex="-1" role="dialog" aria-labelledby="confirm-remove-label" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLongTitle">Are you sure?</h5>
+            <h5 class="modal-title" id="confirm-remove-title">Are you sure?</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -89,7 +100,7 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary" onclick="confirmRemove();">Confirm</button>
+            <button type="button" class="btn btn-primary">Confirm</button>
           </div>
         </div>
       </div>
