@@ -25,7 +25,7 @@ SECRET_KEY = '9vn7&joi7kq@+da75&zse_=vgl0hmga&!ji4t2s4$8ov5hx7+6'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1' 'vsnry.pythonanywhere']
+ALLOWED_HOSTS = ['127.0.0.1' 'vsnry.pythonanywhere.com']
 
 
 # Application definition
