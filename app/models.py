@@ -24,6 +24,7 @@ class List(models.Model):
 
 
 class Item(models.Model):
+    user = models.ForeignKey('auth.User', on_delete=models.CASCADE)
     list = models.ForeignKey(List, on_delete=models.CASCADE)
     primary = models.CharField(max_length=256)
     secondary = models.CharField(max_length=256)

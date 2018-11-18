@@ -134,15 +134,8 @@ table, tr, td {
     text-align: center;
     padding-top: 88px;
     font-family: 'Raleway', sans-serif;
-    font-size: 24px;
+    font-size: 28px;
 }
-@media all and (max-width: 320px) {
-    .actions a {
-        font-size: 18px;
-    }
-}
-
-
 #mark-correct {
     background-color: #00cc73;
 }

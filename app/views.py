@@ -15,26 +15,25 @@ def welcome(request):
     return render(request, 'app/landing.html')
 
 
-@login_required(login_url="/login")
+@login_required(login_url="/accounts/login")
 def home(request):
-    q = List.objects.all()
+    q = List.objects.filter(user=request.user.id)
     return render(request, 'app/home.html', {'lists': q})
 
 
-@login_required(login_url="/login")
+@login_required(login_url="/accounts/login")
 def get_item(request):
     if request.method == 'POST':
         lists_obj = json.loads(request.body.decode('utf-8'))
-        print(lists_obj)
 
         if len(lists_obj["lists"]) > 0:
             # Get Items from selected user created Lists
-            q = Item.objects.filter(list_id__in=lists_obj["lists"])
+            q = Item.objects.filter(list_id__in=lists_obj["lists"], user=request.user.id)
 
             # Get Least Frequent Items (if requried)
             ordered_r = Item.objects.none()
             if "998" in lists_obj["lists"]:
-                r_with_totals = Item.objects.annotate(totals=F('correct') + F('incorrect'))
+                r_with_totals = Item.objects.filter(user=request.user.id).annotate(totals=F('correct') + F('incorrect'))
                 ordered_r = r_with_totals.order_by('totals')
 
                 if len(ordered_r) > 5:
@@ -45,7 +44,7 @@ def get_item(request):
             # Most Difficult Items (if required)
             ordered_s = Item.objects.none()
             if "999" in lists_obj["lists"]:
-                s_with_stats = Item.objects.annotate(stats=(F('correct')/(F('correct') + F('incorrect'))))
+                s_with_stats = Item.objects.filter(user=request.user.id).annotate(stats=(F('correct')/(F('correct') + F('incorrect'))))
                 ordered_s = s_with_stats.order_by('stats')
 
                 if len(ordered_s) > 5:
@@ -86,7 +85,7 @@ def get_item(request):
         return redirect('error')
 
 
-@login_required(login_url="/login")
+@login_required(login_url="/accounts/login")
 def mark_correct(request):
     if request.method == 'POST':
         item_id = json.loads(request.body.decode('utf-8'))["item"]
@@ -99,7 +98,7 @@ def mark_correct(request):
         return redirect('error')
 
 
-@login_required(login_url="/login")
+@login_required(login_url="/accounts/login")
 def mark_incorrect(request):
     if request.method == 'POST':
         item_id = json.loads(request.body.decode('utf-8'))["item"]
@@ -112,20 +111,20 @@ def mark_incorrect(request):
         return redirect('error')
 
 
-@login_required(login_url="/login")
+@login_required(login_url="/accounts/login")
 def lists(request):
-    q = List.objects.all()
+    q = List.objects.filter(user=request.user.id)
     return render(request, 'app/lists.html', {'query': q})
 
 
-@login_required(login_url="/login")
+@login_required(login_url="/accounts/login")
 def list_view(request, pk):
     list_obj = get_object_or_404(List, pk=pk)
     q = Item.objects.filter(list=list_obj.id)
     return render(request, 'app/list_view.html', {'list': list_obj, 'query': q})
 
 
-@login_required(login_url="/login")
+@login_required(login_url="/accounts/login")
 def list_edit(request, pk):
     list_obj = get_object_or_404(List, pk=pk)
 
@@ -141,7 +140,7 @@ def list_edit(request, pk):
     return render(request, 'app/list_edit.html', {'form': edit_form, 'list': list_obj})
 
 
-@login_required(login_url="/login")
+@login_required(login_url="/accounts/login")
 def list_create(request):
     if request.method == 'POST':
         f = ListForm(request.POST)
@@ -156,26 +155,26 @@ def list_create(request):
     return render(request, 'app/list_create.html', {'form': f})
 
 
-@login_required(login_url="/login")
+@login_required(login_url="/accounts/login")
 def list_remove(request, pk):
     list_obj = get_object_or_404(List, pk=pk)
     list_obj.delete()
     return redirect('lists')
 
 
-@login_required(login_url="/login")
+@login_required(login_url="/accounts/login")
 def items(request):
-    q = Item.objects.all()
+    q = Item.objects.filter(user=request.user.id)
     return render(request, 'app/items.html', {'query': q})
 
 
-@login_required(login_url="/login")
+@login_required(login_url="/accounts/login")
 def item_view(request, pk):
     item_obj = get_object_or_404(Item, pk=pk)
     return render(request, 'app/item_view.html', {'item': item_obj})
 
 
-@login_required(login_url="/login")
+@login_required(login_url="/accounts/login")
 def item_edit(request, pk):
     item_obj = get_object_or_404(Item, pk=pk)
 
@@ -191,16 +190,15 @@ def item_edit(request, pk):
     return render(request, 'app/item_edit.html', {'form': edit_form, 'item': item_obj})
 
 
-@login_required(login_url="/login")
+@login_required(login_url="/accounts/login")
 def item_create(request, pk=None):
     list_obj = None
-    print(pk)
     if request.method == 'POST':
         f = ItemForm(request.POST)
         if f.is_valid():
-            f.save()
-
-            print(pk)
+            obj = f.save(commit=False)
+            obj.user = request.user
+            obj.save()
 
             if pk is not None:
                 return redirect('list_view', pk)
@@ -216,27 +214,26 @@ def item_create(request, pk=None):
     return render(request, 'app/item_create.html', {'form': f, 'list': list_obj})
 
 
-@login_required(login_url="/login")
+@login_required(login_url="/accounts/login")
 def item_remove(request, pk):
     item_obj = get_object_or_404(Item, pk=pk)
     item_obj.delete()
     return redirect('items')
 
 
-@login_required(login_url="/login")
+@login_required(login_url="/accounts/login")
 def account(request):
-    q = List.objects.all()
-    return render(request, 'registration/account.html', {'query': q})
+    return render(request, 'registration/account.html')
 
 
-@login_required(login_url="/login")
+@login_required(login_url="/accounts/login")
 def account_remove(request):
     user = request.user
     user.delete()
     return render(request, 'app/landing.html')
 
 
-@login_required(login_url="/login")
+@login_required(login_url="/accounts/login")
 def reset_stats(request, pk):
     # TODO
     if pk == 'all':
@@ -254,7 +251,6 @@ def reset_stats(request, pk):
 def register(request):
     if request.method == 'POST':
         f = UserCreationForm(request.POST)
-        print(f)
         if f.is_valid():
             f.save()
             messages.success(request, 'Account created.')
@@ -262,14 +258,14 @@ def register(request):
     else:
         f = UserCreationForm()
 
-    return render(request, 'registration/register.html', {'form': f})
+    return render(request, 'registration/register.html', {'form': f, 'messages': messages})
 
 
 def login(request):
     return render(request, 'registration/login.html')
 
 
-@login_required(login_url="/login")
+@login_required(login_url="/accounts/login")
 def help(request):
     return render(request, 'app/help.html')
 

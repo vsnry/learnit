@@ -12,7 +12,6 @@
     <!-- Handle remove modal -->
     <script>
         function showModal() {
-            jQuery.noConflict();
             $(".modal-body").html("Are you sure you would like to remove <b>" + "{{ item }}" + "</b>?");
             $("#confirm-remove").find('.btn-primary').attr('onclick', "window.location='/item_remove/{{ item.pk }}';");
             $("#confirm-remove").modal('show');
@@ -22,7 +21,6 @@
     <!-- Handle reset modal -->
     <script>
         function showResetModal() {
-            jQuery.noConflict();
             $(".modal-body").html("Are you sure you would like to reset the statistics for <b>" + "{{ item }}" + "</b>?");
             $("#confirm-remove").find('.btn-primary').attr('onclick', "window.location='/item/reset_stats/{{ item.pk }}';");
             $("#confirm-remove").modal('show');
@@ -96,27 +94,30 @@
 
         <small><a href="javascript:void(0)" onclick="showResetModal();">Reset Status</a></small>
         <br>
+    </div>
+    <br>
+    <br>
 
-        <!-- Modal -->
-        <div class="modal fade" id="confirm-remove" tabindex="-1" role="dialog" aria-labelledby="confirm-remove-label" aria-hidden="true">
-          <div class="modal-dialog" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="confirm-remove-title">Are you sure?</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <div class="modal-body">
-                Please confirm that you would like to delete [].
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Confirm</button>
-              </div>
-            </div>
+    <!-- Modal -->
+    <div class="modal fade" id="confirm-remove" tabindex="-1" role="dialog" aria-labelledby="confirm-remove-label" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="confirm-remove-title">Are you sure?</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            Please confirm that you would like to delete [].
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Confirm</button>
           </div>
         </div>
+      </div>
     </div>
+
 
 {% endblock %}

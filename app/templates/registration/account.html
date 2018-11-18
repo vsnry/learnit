@@ -5,10 +5,12 @@
 {% endblock %}
 
 {% block main %}
+    <!-- Load jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
     <!-- Handle modal -->
     <script>
         function showModal() {
-            jQuery.noConflict();
             $(".modal-body").html("Are you sure that you would like to remove this account?<br><small>Please be aware that this action is final and cannot be undone.</small>");
             $("#confirm-remove").find('.btn-primary').attr('onclick', "window.location='/account/remove/'");
             $("#confirm-remove").modal('show');
@@ -29,10 +31,7 @@
 
         <br>
 
-        <a href="#" class="btn btn-primary">Change Password</a>
-        <br>
-        <br>
-        <small><a href="javascript:void(0)" onclick="showModal();">Remove Account</a></small>
+        <a href="javascript:void(0)" onclick="showModal();" class="btn btn-primary" style="background-color: #ff338c; border: 0;">Remove Account</a>
         <br>
 
     </div>
