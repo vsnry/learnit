@@ -124,6 +124,19 @@ table, tr, td {
 .actions {
     text-align: center;
 }
+@media only screen and (max-width: 1080px) {
+    .actions {
+        display: none;
+    }
+    .notes {
+        display: none;
+    }
+}
+@media only screen and (min-width: 1080px) {
+    .round-actions-location {
+        display: none;
+    }
+}
 .actions a {
     background-color: #222222;
     color: #ffffff;
@@ -132,7 +145,7 @@ table, tr, td {
     height: 200px;
     border-radius: 4px;
     text-align: center;
-    padding-top: 88px;
+    padding-top: 84px;
     font-family: 'Raleway', sans-serif;
     font-size: 28px;
 }
