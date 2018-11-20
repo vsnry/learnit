@@ -138,11 +138,10 @@ table, tr, td {
 }
 .round-actions {
     background-color: #222222;
-    width: 80px;
-    height: 80px;
-    border-radius: 40px;
+    width: 70px;
+    height: 70px;
+    border-radius: 35px;
     text-align: center;
-    padding-top: 26px;
     margin-bottom: 4px;
 }
 .round-actions a {
@@ -151,7 +150,7 @@ table, tr, td {
 }
 .round-actions-location {
     position: absolute;
-    top: 200px;
+    bottom: 12px;
     right: 12px;
 }
 #mark-correct {
