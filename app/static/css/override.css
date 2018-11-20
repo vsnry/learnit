@@ -150,7 +150,7 @@ table, tr, td {
     color: #ffffff;
 }
 .round-actions-location {
-    position: absolute;
+    position: fixed;
     bottom: 12px;
     right: 0;
 }
